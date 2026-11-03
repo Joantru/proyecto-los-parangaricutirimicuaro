@@ -1,0 +1,5 @@
+# Catálogo de imágenes que ya vienen en el proyecto (carpeta src/main/webapp/media).
+# Formato: codigo;titulo;categoria;enredo;tiempoSeg;descripcion;archivo;autor
+J001;Pablito clavó un clavito;Tradicional;4;4.5;El clásico: ¿qué clavito clavó Pablito?;pablito.png;encuentos.com
+J002;Pocas copas compré;Tradicional;6;6.0;Pocas copas compró, y pocas copas pagó;pocas_copas.jpeg;italiamesaycocina.co
+J003;Tres tristes tigres;Tradicional;8;5.2;Tres tigres trigo en un trigal: el rey de los trabalenguas;tres_tigres.jpg;youtube.com
