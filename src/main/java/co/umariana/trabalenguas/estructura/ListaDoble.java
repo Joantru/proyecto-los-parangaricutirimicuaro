@@ -49,23 +49,27 @@ public class ListaDoble<T> implements Lista<T> {
         }
 
         Nodo nuevo = new Nodo(elemento);
+
         if (tamano == 0) {
             cabeza = cola = cursor = nuevo;
+        } else if (indice == 0) {
+            nuevo.siguiente = cabeza;
+            cabeza.anterior = nuevo;
+            cabeza = nuevo;
         } else if (indice == tamano) {
             nuevo.anterior = cola;
             cola.siguiente = nuevo;
             cola = nuevo;
         } else {
             Nodo siguiente = nodoEn(indice);
-            nuevo.anterior = siguiente.anterior;
+            Nodo anterior = siguiente.anterior;
+
+            nuevo.anterior = anterior;
             nuevo.siguiente = siguiente;
-            if (siguiente.anterior == null) {
-                cabeza = nuevo;
-            } else {
-                siguiente.anterior.siguiente = nuevo;
-            }
+            anterior.siguiente = nuevo;
             siguiente.anterior = nuevo;
         }
+
         tamano++;
     }
 
