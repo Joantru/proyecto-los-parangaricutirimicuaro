@@ -5,20 +5,6 @@ import java.util.NoSuchElementException;
 
 /**
  * Lista DOBLEMENTE enlazada del equipo (tarea de ESTRUCTURA).
- *
- * <p>Cada nodo conoce al nodo {@code siguiente} y al {@code anterior}. Implemente la lista con sus
- * propios nodos: no se permite usar {@code ArrayList}, {@code LinkedList} ni ninguna otra colección
- * de {@code java.util} para guardar los elementos (las pruebas lo revisan).
- *
- * <p>Se espera que guarde la {@code cabeza} y la {@code cola}, de modo que agregar al final y
- * retroceder el cursor sean operaciones inmediatas (sin recorrer toda la lista).
- *
- * <p>Comportamiento del cursor: se DETIENE en los extremos. {@link #avanzar()} desde el último
- * elemento devuelve {@code false} y el cursor no se mueve; {@link #retroceder()} desde el primero
- * también devuelve {@code false}. En una lista vacía ambos devuelven {@code false}.
- *
- * <p>Al eliminar el elemento donde está el cursor, el cursor pasa al siguiente; si no había
- * siguiente, pasa al anterior.
  */
 public class ListaDoble<T> implements Lista<T> {
 
@@ -52,21 +38,19 @@ public class ListaDoble<T> implements Lista<T> {
 
         if (tamano == 0) {
             cabeza = cola = cursor = nuevo;
-        } else if (indice == 0) {
+        } else if (indice == 0) { // Inserción al inicio explícita
             nuevo.siguiente = cabeza;
             cabeza.anterior = nuevo;
             cabeza = nuevo;
-        } else if (indice == tamano) {
+        } else if (indice == tamano) { // Inserción al final explícita
             nuevo.anterior = cola;
             cola.siguiente = nuevo;
             cola = nuevo;
-        } else {
+        } else { // Inserción intermedia
             Nodo siguiente = nodoEn(indice);
-            Nodo anterior = siguiente.anterior;
-
-            nuevo.anterior = anterior;
+            nuevo.anterior = siguiente.anterior;
             nuevo.siguiente = siguiente;
-            anterior.siguiente = nuevo;
+            siguiente.anterior.siguiente = nuevo;
             siguiente.anterior = nuevo;
         }
 
@@ -89,6 +73,7 @@ public class ListaDoble<T> implements Lista<T> {
         } else {
             anterior.siguiente = siguiente;
         }
+
         if (siguiente == null) {
             cola = anterior;
         } else {
@@ -98,6 +83,7 @@ public class ListaDoble<T> implements Lista<T> {
         if (cursor == eliminado) {
             cursor = siguiente != null ? siguiente : anterior;
         }
+
         tamano--;
         if (tamano == 0) {
             cabeza = cola = cursor = null;
